@@ -28,4 +28,4 @@ EXPOSE 8501
 EXPOSE 9999
 
 # Run the app 
-CMD ["python", "app/main.py"]
+CMD ["python", "main.py"]
