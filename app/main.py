@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from app.common.logger import get_logger
 from app.common.custom_exception import CustomException
 
-logger=get_logger(__name__)
+logger = get_logger(__name__)
 
 load_dotenv()
 
