@@ -2,8 +2,8 @@ import subprocess
 import threading
 import time
 from dotenv import load_dotenv
-from app.common.logger import get_logger
-from app.common.custom_exception import CustomException
+from .common.logger import get_logger
+from .common.custom_exception import CustomException
 
 logger = get_logger(__name__)
 
@@ -12,7 +12,7 @@ load_dotenv()
 def run_backend():
     try:
         logger.info("Starting backend server")
-        subprocess.run(["uvicorn", "app.backend.app:app", "--host", "0.0.0.0", "--port", "9999"], check=True)
+        subprocess.run(["uvicorn", "app.backend.api:app", "--host", "127.0.0.1", "--port", "9999"], check=True)
     except Exception as e:
         logger.error("Backend server failed to start")
         raise CustomException("Backend server failed to start", error_detail=e)

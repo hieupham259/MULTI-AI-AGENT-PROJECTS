@@ -29,7 +29,7 @@ def chat_endpoint(request: RequestState):
             model_name=request.model_name,
             system_prompt=request.system_prompt,
             messages=request.messages,
-            allow_search=request.allow_search
+            allow_search=request.allow_search,
         )
         return {"response": response}
     except Exception as e:

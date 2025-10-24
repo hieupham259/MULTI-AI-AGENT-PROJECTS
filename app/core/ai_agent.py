@@ -6,9 +6,9 @@ from langchain_core.messages.ai import AIMessage
 
 from app.config.settings import settings
 
-def get_response_from_ai_agents(llm_id , query , allow_search ,system_prompt):
+def get_response_from_ai_agents(model_name, system_prompt, messages, allow_search):
 
-    llm = ChatGroq(model=llm_id)
+    llm = ChatGroq(model=model_name)
 
     tools = [TavilySearchResults(max_results=2)] if allow_search else []
 
@@ -18,7 +18,7 @@ def get_response_from_ai_agents(llm_id , query , allow_search ,system_prompt):
         system_prompt=system_prompt
     )
 
-    state = {"messages" : query}
+    state = {"messages" : messages}
 
     response = agent.invoke(state)
 
