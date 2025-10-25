@@ -1,16 +1,19 @@
-from langchain_groq import ChatGroq
-from langchain_community.tools.tavily_search import TavilySearchResults
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_community.tools import TavilySearchResults
 
 from langchain.agents import create_agent
 from langchain_core.messages.ai import AIMessage
 
 from app.config.settings import settings
 
+
 def get_response_from_ai_agents(model_name, system_prompt, messages, allow_search):
+    llm = ChatGoogleGenerativeAI(
+        api_key=settings.GEMINI_API_KEY,
+        model=model_name
+    )
 
-    llm = ChatGroq(model=model_name)
-
-    tools = [TavilySearchResults(max_results=2)] if allow_search else []
+    tools = [TavilySearchResults(max_results=5, topic="general")] if allow_search else []
 
     agent = create_agent(
         model=llm,
@@ -27,3 +30,13 @@ def get_response_from_ai_agents(model_name, system_prompt, messages, allow_searc
     ai_messages = [message.content for message in messages if isinstance(message,AIMessage)]
 
     return ai_messages[-1]
+
+
+if __name__ == "__main__":
+    system_prompt = "You are a helpful machine learning assistant."
+    messages = [{"role": "user", "content": "Explain machine learning"}]
+    model_name = "gemini-2.5-flash"
+    allow_search = True
+
+    response = get_response_from_ai_agents(model_name, system_prompt, messages, allow_search)
+    print("AI Agent Response:", response)
