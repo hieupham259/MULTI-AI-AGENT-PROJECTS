@@ -181,6 +181,14 @@ docker logs jenkins-dind
 
 You should see a password in the output. Copy that password.
 
+To test whether can run docker inside Jenkins container:
+
+```bash
+sudo chmod 777 /var/run/docker.sock
+docker exec -it jenkins-dind bash
+docker run hello-world
+```
+
 ### 7. Find WSL IP Address
 
 Run the following command to get the IP address of your WSL environment:
