@@ -5,7 +5,9 @@ from langchain.agents import create_agent
 from langchain_core.messages.ai import AIMessage
 
 from app.config.settings import settings
+from app.common.logger import get_logger
 
+logger = get_logger(__name__)
 
 def get_response_from_ai_agents(model_name, system_prompt, messages, allow_search):
     llm = ChatGoogleGenerativeAI(
@@ -26,6 +28,9 @@ def get_response_from_ai_agents(model_name, system_prompt, messages, allow_searc
     state = {"messages" : messages}
 
     response = agent.invoke(state)
+    logger.info("system_prompt: %s", system_prompt)
+    logger.info("messages: %s", messages)
+    logger.info("responses: %s", response)
     ai_response = "No response generated."
 
     messages = response.get("messages")

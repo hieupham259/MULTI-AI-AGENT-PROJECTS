@@ -7,8 +7,8 @@ set -e  # Exit on any error
 
 CONTAINER_NAME="multi-agent-ai"
 IMAGE_NAME="multi-agent-ai"
-PORT_8501=8501
-PORT_9999=9999
+UI_PORT=8500
+BACKEND_PORT=9999
 
 echo "Starting deployment of Multi-Agent AI application..."
 
@@ -36,8 +36,8 @@ docker build -t ${IMAGE_NAME} .
 echo "Starting container: ${CONTAINER_NAME}"
 docker run -d \
     --name ${CONTAINER_NAME} \
-    -p ${PORT_8501}:8501 \
-    -p ${PORT_9999}:9999 \
+    -p ${UI_PORT}:8501 \
+    -p ${BACKEND_PORT}:9999 \
     --restart unless-stopped \
     ${IMAGE_NAME}
 
@@ -49,8 +49,8 @@ if docker ps --format 'table {{.Names}}' | grep -q "^${CONTAINER_NAME}$"; then
     docker ps --filter name=${CONTAINER_NAME} --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
     echo ""
     echo "Application should be accessible at:"
-    echo "   - Port 8501: http://localhost:${PORT_8501}"
-    echo "   - Port 9999: http://localhost:${PORT_9999}"
+    echo "   - Port ${UI_PORT}: http://localhost:${UI_PORT}"
+    echo "   - Port ${BACKEND_PORT}: http://localhost:${BACKEND_PORT}"
 else
     echo "Failed to start container '${CONTAINER_NAME}'"
     echo "Container logs:"

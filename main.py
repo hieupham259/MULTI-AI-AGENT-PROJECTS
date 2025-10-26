@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
         # run frontend in the same process (this will block until Streamlit exits)
         run_frontend_in_same_process()
-
+        # run_backend()
     except CustomException as e:
         logger.exception("CustomException occurred: %s", str(e))
     except KeyboardInterrupt:
