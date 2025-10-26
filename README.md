@@ -132,7 +132,7 @@ Follow the steps below to deploy the application.
 
 - Make sure you run commands inside a WSL terminal in VS Code
 
-## 🛠️ Step 1 :  Jenkins Setup for CI/CD (via Docker)
+## 🛠️ Step 1 :  Jenkins Setup for CI/CD (via Docker: https://www.jenkins.io/doc/book/installing/docker/)
 
 Follow the steps below to set up Jenkins inside a Docker container and configure it for the project:
 
