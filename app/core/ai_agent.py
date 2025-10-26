@@ -38,8 +38,11 @@ def get_response_from_ai_agents(model_name, system_prompt, messages, allow_searc
     # ai_messages = [message.content for message in messages if isinstance(message,AIMessage)]
     for message in messages: 
         if isinstance(message,AIMessage):
-            content = message.content[-1]
-            ai_response = content.get('text')
+            if isinstance(message.content, list):
+                content = message.content[-1]
+                ai_response = content.get('text')
+            else:
+                ai_response = message.content
     return ai_response
 
 
