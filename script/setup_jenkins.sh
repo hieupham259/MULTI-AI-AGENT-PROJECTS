@@ -21,11 +21,23 @@ fi
 
 # Build and run the Jenkins container with Docker-in-Docker support
 docker build -t jenkins-dind -f ../Dockerfile.jenkins .
+
+# Run Jenkins container if host machine is Ubuntu/Linux hosts
+# sudo chmod 777 /var/run/docker.sock
+# docker run -d --name jenkins-dind \
+# 	--privileged \
+# 	-p 8081:8080 -p 50000:50000 \
+# 	-v /var/run/docker.sock:/var/run/docker.sock \
+# 	-v jenkins_home:/var/jenkins_home \
+# 	jenkins-dind
+
+# Run Jenkins container if host machine is Windows
 docker run -d --name jenkins-dind \
 	--privileged \
-	-p 8080:8080 -p 50000:50000 \
+	-p 8081:8080 -p 50000:50000 \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v jenkins_home:/var/jenkins_home \
+    -v /var/run/docker.sock:/var/run/docker.sock \
 	jenkins-dind
 
 # Check if container is running
@@ -33,4 +45,4 @@ echo "Checking container status..."
 docker ps -f name=jenkins-dind
 
 # Retrieve Jenkins logs and get the initial admin password
-docker logs jenkins-dind 2>&1 | grep 'Please use the following password to proceed to installation:'
+docker logs jenkins-dind
