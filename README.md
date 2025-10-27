@@ -320,8 +320,8 @@ Follow these steps to integrate **SonarQube** with Jenkins for code quality anal
 2. Run the following commands in a new WSL terminal to configure the system:
 
 ```bash
-sysctl -w vm.max_map_count=524288
-sysctl -w fs.file-max=131072
+sudo sysctl -w vm.max_map_count=524288
+sudo sysctl -w fs.file-max=131072
 ulimit -n 131072
 ulimit -u 8192
 ```
