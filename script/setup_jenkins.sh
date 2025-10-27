@@ -23,15 +23,16 @@ fi
 docker build -t jenkins-dind -f ../Dockerfile.jenkins .
 
 # Run Jenkins container if host machine is Ubuntu/Linux hosts
-# sudo chmod 777 /var/run/docker.sock
-# docker run -d --name jenkins-dind \
-# 	--privileged \
-# 	-p 8081:8080 -p 50000:50000 \
-# 	-v /var/run/docker.sock:/var/run/docker.sock \
-# 	-v jenkins_home:/var/jenkins_home \
-# 	jenkins-dind
+sudo chmod 777 /var/run/docker.sock
+docker run -d --name jenkins-dind \
+	--privileged \
+	-p 8081:8080 -p 50000:50000 \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v jenkins_home:/var/jenkins_home \
+	jenkins-dind
 
 # Run Jenkins container if host machine is Windows
+# Run on WSL
 docker run -d --name jenkins-dind \
 	--privileged \
 	-p 8081:8080 -p 50000:50000 \
