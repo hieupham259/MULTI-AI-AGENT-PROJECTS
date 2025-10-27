@@ -14,8 +14,8 @@ API_URL = "http://127.0.0.1:9999/api/chat"
 def render() -> None:
     """Render the Streamlit UI and handle interactions."""
     # Must be the first Streamlit command
-    st.set_page_config(page_title="Multi AI Agent", layout="centered")
-    st.title("Multi AI Agent using Gemini and Tavily New")
+    st.set_page_config(page_title="Multi AI Agents", layout="centered")
+    st.title("Multi AI Agents using multi Gemini models and Tavily Search")
 
     # Use a form to avoid side effects on every widget interaction/rerun
     with st.form("agent_form"):
